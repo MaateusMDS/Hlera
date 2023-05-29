@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.cglib.core.Local;
+
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -11,7 +14,9 @@ import lombok.Setter;
 @Setter
 
 public class Pessoa {
+    private Long id;
     private String nome;
     private String cpf;
     private String rg;
+    private LocalDate dataNascimento;
 }
