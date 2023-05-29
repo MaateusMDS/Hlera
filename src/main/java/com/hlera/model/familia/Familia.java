@@ -16,6 +16,6 @@ public class Familia {
     )
     private Long id;
     private double rendaSalarial;
-    private Set<Pessoa> membros = new LinkedHashSet<>();
+//    private Set<Pessoa> membros = new LinkedHashSet<>();
 
 }
