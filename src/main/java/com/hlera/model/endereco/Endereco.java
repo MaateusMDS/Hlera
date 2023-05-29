@@ -17,7 +17,6 @@ import java.nio.charset.StandardCharsets;
 @AllArgsConstructor
 @Getter
 @Setter
-
 public class Endereco {
 
     private Long id;
@@ -25,10 +24,20 @@ public class Endereco {
     private String bairro;
     private String localidade;
     private String uf;
-
     private String cep;
 
-    public  Endereco (String cep) throws MalformedURLException {
+    public Endereco(String cep) throws MalformedURLException {
+        var dados = encontrarCep(cep);
+        if (dados != null) {
+            this.cep = dados.optString("cep");
+            this.logradouro = dados.optString("logradouro");
+            this.bairro = dados.optString("bairro");
+            this.localidade = dados.optString("localidade");
+            this.uf = dados.optString("uf");
+        }
+    }
+
+    public JSONObject encontrarCep(String cep) throws MalformedURLException {
         URL url = new URL("http://viacep.com.br/ws/" + cep + "/json");
         HttpURLConnection conexao = null;
 
@@ -38,20 +47,16 @@ public class Endereco {
 
             if (conexao.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 String conteudo = new String(conexao.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
-                JSONObject json = new JSONObject(conteudo);
-
-                this.cep = json.optString("cep");
-                this.logradouro = json.optString("logradouro");
-                this.bairro = json.optString("bairro");
-                this.localidade = json.optString("localidade");
-                this.uf = json.optString("uf");
-
+                return new JSONObject(conteudo);
             } else {
-                // Lida com o código de resposta HTTP não OK
-                System.out.println("Erro na solicitação: " + conexao.getResponseCode());
+                JSONObject json = new JSONObject();
+                json.put("error", "Erro na solicitação");
+                return json;
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            JSONObject json = new JSONObject();
+            json.put("error", e.getStackTrace());
+            return json;
         } finally {
             if (conexao != null) {
                 conexao.disconnect();
