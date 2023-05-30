@@ -1,8 +1,15 @@
 package com.hlera.model.familia;
 
 import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 
 @Entity
 @Table(name = "TB_HLERA_FAMILIA")
@@ -14,9 +21,11 @@ public class Familia {
             sequenceName = "SQ_FAMILIA"
     )
     @Column(name = "ID_FAMILIA")
+    @Getter @Setter
     private Long id;
 
     @Column(name = "NR_RENDA_SALARIAL")
+    @Getter @Setter
     private double rendaSalarial;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -38,5 +47,20 @@ public class Familia {
             }
     )
 
-    private Set<Pessoa> membros = new LinkedHashSet<>();
+    private Set<Familia> membros = new LinkedHashSet<>();
+
+    public Familia addMembro(Familia membro) {
+        if (membro.equals(this)) throw new RuntimeException();
+        this.membros.add(membro);
+        return this;
+    }
+
+    public Familia removeMembro(Familia membro) {
+        this.membros.remove(membro);
+        return this;
+    }
+
+    public Set<Familia> getMembros() {
+        return Collections.unmodifiableSet(membros);
+    }
 }

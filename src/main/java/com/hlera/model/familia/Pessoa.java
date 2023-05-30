@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 
 @Entity
 @Table(name = "TB_HLERA_PESSOA")

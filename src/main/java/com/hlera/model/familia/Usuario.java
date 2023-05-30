@@ -1,14 +1,17 @@
 package com.hlera.model.familia;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 
 @Entity
 @Table(name = "TB_HLERA_USUARIO", uniqueConstraints = {
         @UniqueConstraint(name = "UN_EMAIL", columnNames = "DS_EMAIL")
 })
+
 public class Usuario {
     @Id
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
