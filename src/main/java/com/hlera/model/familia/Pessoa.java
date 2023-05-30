@@ -17,6 +17,7 @@ public class Pessoa {
     @Id
     @GeneratedValue(generator = "SQ_PESSOA", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "SQ_PESSOA")
+    @Column(name = "ID_PESSOA")
     private Long id;
     @Column(name = "NM_PESSOA")
     private String nome;

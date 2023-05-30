@@ -5,10 +5,12 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Table(name = "TB_USUARIO", uniqueConstraints = {
+@Entity
+@Table(name = "TB_HLERA_USUARIO", uniqueConstraints = {
         @UniqueConstraint(name = "UN_EMAIL", columnNames = "DS_EMAIL")
 })
 public class Usuario {
+    @Id
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(
             name = "ID_PESSOA", referencedColumnName = "ID_PESSOA"

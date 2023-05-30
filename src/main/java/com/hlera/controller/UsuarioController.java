@@ -11,6 +11,6 @@ public class UsuarioController {
 
     @GetMapping
     public boolean loginUser(@RequestParam("user") String user, @RequestParam("senha")String senha){
-        return user.equals("admin") || senha.equals("123");
+        return user.equals("admin") && senha.equals("123");
     }
 }
