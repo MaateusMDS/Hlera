@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.util.Collections;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -35,7 +36,7 @@ public class Familia {
                     @JoinColumn(
                             name = "ID_FAMILIA",
                             referencedColumnName = "ID_FAMILIA",
-                            foreignKey = @ForeignKey(name = "FK_MEMBRO")
+                            foreignKey = @ForeignKey(name = "FK_FAMILIA")
                     )
             },
             inverseJoinColumns = {
@@ -47,20 +48,19 @@ public class Familia {
             }
     )
 
-    private Set<Familia> membros = new LinkedHashSet<>();
+    private Set<Pessoa> membros = new LinkedHashSet<>();
 
-    public Familia addMembro(Familia membro) {
-        if (membro.equals(this)) throw new RuntimeException();
+    public Familia addMembro(Pessoa membro) {
         this.membros.add(membro);
         return this;
     }
 
-    public Familia removeMembro(Familia membro) {
+    public Familia removeMembro(Pessoa membro) {
         this.membros.remove(membro);
         return this;
     }
 
-    public Set<Familia> getMembros() {
+    public Set<Pessoa> getMembros() {
         return Collections.unmodifiableSet(membros);
     }
 }

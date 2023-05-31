@@ -16,7 +16,7 @@ public class Usuario {
     @Id
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(
-            name = "ID_PESSOA", referencedColumnName = "ID_PESSOA"
+            name = "ID_PESSOA", referencedColumnName = "ID_PESSOA", foreignKey = @ForeignKey(name = "FK_USUARIO")
     )
     private Pessoa id;
     @Getter @Setter

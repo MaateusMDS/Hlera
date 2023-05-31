@@ -1,6 +1,7 @@
 package com.hlera.model.endereco;
 
 import com.google.gson.Gson;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,13 +18,27 @@ import java.nio.charset.StandardCharsets;
 @AllArgsConstructor
 @Getter
 @Setter
+
+@Entity
+@Table(name = "TB_HLERA_ENDERECO")
 public class Endereco {
 
+    @Id
+    @JoinColumn(
+            name = "ID_FAMILIA",
+            referencedColumnName = "ID_FAMILIA",
+            foreignKey = @ForeignKey(name = "FK_FAMILIA_ENDERECO")
+    )
     private Long id;
+    @Column(name = "DS_LOGRADOURO")
     private String logradouro;
+    @Column(name = "DS_BAIRRO")
     private String bairro;
+    @Column(name = "DS_LOCALIDADE")
     private String localidade;
+    @Column(name = "SG_UF")
     private String uf;
+    @Column(name = "NR_CEP")
     private String cep;
 
     public Endereco(String cep) throws MalformedURLException {
