@@ -1,9 +1,7 @@
 package com.hlera.controller.record;
 
 import com.hlera.model.endereco.Endereco;
-import com.hlera.model.familia.Usuario;
-import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
+import com.hlera.model.Pessoa.Usuario;
 
 import java.time.LocalDate;
 

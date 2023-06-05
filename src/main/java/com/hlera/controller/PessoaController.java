@@ -2,7 +2,7 @@ package com.hlera.controller;
 
 import com.hlera.controller.record.putPessoa;
 import com.hlera.controller.record.savePessoa;
-import com.hlera.model.familia.Pessoa;
+import com.hlera.model.Pessoa.Pessoa;
 import com.hlera.repository.PessoaRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;

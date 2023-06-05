@@ -1,7 +1,6 @@
 package com.hlera.model.campanha;
 
-import com.hlera.model.endereco.Endereco;
-import com.hlera.model.familia.Pessoa;
+import com.hlera.model.Pessoa.Pessoa;
 import jakarta.persistence.*;
 import lombok.*;
 

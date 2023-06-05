@@ -1,4 +1,4 @@
-package com.hlera.model.familia;
+package com.hlera.model.Pessoa;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,11 +1,10 @@
-package com.hlera.model.familia;
+package com.hlera.model.Pessoa;
 
 import com.hlera.controller.record.putPessoa;
 import com.hlera.controller.record.savePessoa;
 import com.hlera.model.endereco.Endereco;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 
