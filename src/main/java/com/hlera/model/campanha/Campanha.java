@@ -1,5 +1,7 @@
 package com.hlera.model.campanha;
 
+import com.hlera.controller.campanha.record.putCampanha;
+import com.hlera.controller.campanha.record.saveCampanha;
 import com.hlera.model.Pessoa.Pessoa;
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,8 +12,6 @@ import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @ToString
 
 @Entity
@@ -25,12 +25,16 @@ public class Campanha {
             sequenceName = "SQ_CAMPANHA"
     )
     @Column(name = "ID_CAMPANHA")
+    @Getter
     private Long id;
     @Column(name = "NM_CAMPANHA")
+    @Getter @Setter
     private String nome;
     @Column(name = "TP_CAMPANHA")
+    @Getter @Setter
     private Tipo tipoCampanha;
     @Column(name = "NR_ITENS_DISPONIVEIS")
+    @Getter @Setter
     private int itensDisponiveis;
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
@@ -64,5 +68,26 @@ public class Campanha {
 
     public Set<Pessoa> getInscritos() {
         return Collections.unmodifiableSet(inscritos);
+    }
+
+    public Campanha(saveCampanha dados) {
+        this.nome = dados.nome();
+        this.tipoCampanha = dados.tipoCampanha();
+        this.itensDisponiveis = dados.itensDisponiveis();
+    }
+    
+    public void atualizar(putCampanha dados){
+        if (dados.nome() != null){
+            this.nome = dados.nome();
+        }
+        if (dados.tipoCampanha() != null){
+            this.tipoCampanha = dados.tipoCampanha();
+        }
+        if (dados.itensDisponiveis() != 0){
+            this.itensDisponiveis = dados.itensDisponiveis();
+        }
+        if (dados.inscritos() != null){
+            this.inscritos = dados.inscritos();
+        }
     }
 }
