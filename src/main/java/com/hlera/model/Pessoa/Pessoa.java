@@ -1,8 +1,7 @@
 package com.hlera.model.Pessoa;
 
-import com.hlera.controller.record.Dados;
-import com.hlera.controller.record.putPessoa;
-import com.hlera.controller.record.savePessoa;
+import com.hlera.controller.pessoa.record.putPessoa;
+import com.hlera.controller.pessoa.record.savePessoa;
 import com.hlera.model.endereco.Endereco;
 import jakarta.persistence.*;
 import lombok.*;

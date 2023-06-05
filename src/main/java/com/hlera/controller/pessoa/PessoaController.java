@@ -1,7 +1,7 @@
-package com.hlera.controller;
+package com.hlera.controller.pessoa;
 
-import com.hlera.controller.record.putPessoa;
-import com.hlera.controller.record.savePessoa;
+import com.hlera.controller.pessoa.record.putPessoa;
+import com.hlera.controller.pessoa.record.savePessoa;
 import com.hlera.model.Pessoa.Pessoa;
 import com.hlera.repository.PessoaRepository;
 import jakarta.transaction.Transactional;

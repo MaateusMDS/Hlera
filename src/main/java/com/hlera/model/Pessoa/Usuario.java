@@ -1,6 +1,6 @@
 package com.hlera.model.Pessoa;
 
-import com.hlera.controller.record.Dados;
+import com.hlera.controller.pessoa.record.Dados;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -1,11 +1,8 @@
-package com.hlera.controller.record;
-
-import com.hlera.model.endereco.Endereco;
-import com.hlera.model.Pessoa.Usuario;
+package com.hlera.controller.pessoa.record;
 
 import java.time.LocalDate;
 
-public record putPessoa(
+public record savePessoa (
         String nome,
         String cpf,
         String rg,

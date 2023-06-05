@@ -1,8 +1,8 @@
-package com.hlera.controller.record;
+package com.hlera.controller.pessoa.record;
 
 import java.time.LocalDate;
 
-public record savePessoa (
+public record putPessoa(
         String nome,
         String cpf,
         String rg,
