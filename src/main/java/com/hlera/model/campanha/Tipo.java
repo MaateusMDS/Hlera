@@ -1,13 +1,13 @@
-package com.hlera.model.familia;
+package com.hlera.model.campanha;
 
-public enum Grupo {
+public enum Tipo {
 
-    DOADOR(0, "Doador"), BENEFICIARIO(1, "Beneficiario");
+    ALIMENTO(0, "Alimento"), ROUPA(1, "Roupa"), OUTRO(2, "OUTRO");
 
     private int id;
     private String nome;
 
-    Grupo(int id, String nome) {
+    Tipo(int id, String nome) {
         this.id = id;
         this.nome = nome;
     }
@@ -16,7 +16,7 @@ public enum Grupo {
         return id;
     }
 
-    public Grupo setId(int id) {
+    public Tipo setId(int id) {
         this.id = id;
         return this;
     }
@@ -25,7 +25,7 @@ public enum Grupo {
         return nome;
     }
 
-    public Grupo setNome(String nome) {
+    public Tipo setNome(String nome) {
         this.nome = nome;
         return this;
     }

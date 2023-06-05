@@ -28,4 +28,8 @@ public class Pessoa {
     private String rg;
     @Column(name = "DT_NASCIMENTO")
     private LocalDate dataNascimento;
+    @Column(name = "NR_CELULAR")
+    private String numeroCelular;
+    @Column(name = "NR_TELEFONE")
+    private String numeroTelefone;
 }
