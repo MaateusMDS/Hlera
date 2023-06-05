@@ -19,27 +19,22 @@ import java.nio.charset.StandardCharsets;
 @Getter
 @Setter
 
-@Entity
-@Table(name = "TB_HLERA_ENDERECO")
+@Embeddable
 public class Endereco {
-
-    @Id
-    @JoinColumn(
-            name = "ID_FAMILIA",
-            referencedColumnName = "ID_FAMILIA",
-            foreignKey = @ForeignKey(name = "FK_FAMILIA_ENDERECO")
-    )
-    private Long id;
+    @Column(name = "DS_ESTADO")
+    private String estado;
+    @Column(name = "DS_CIDADE")
+    private String cidade;
     @Column(name = "DS_LOGRADOURO")
     private String logradouro;
     @Column(name = "DS_BAIRRO")
     private String bairro;
-    @Column(name = "DS_LOCALIDADE")
-    private String localidade;
-    @Column(name = "SG_UF")
-    private String uf;
     @Column(name = "NR_CEP")
     private String cep;
+    @Column(name = "NR_NUMERO")
+    private String numero;
+    @Column(name = "DS_COMPLEMENTO")
+    private String complemento;
 
     public Endereco(String cep) throws MalformedURLException {
         var dados = encontrarCep(cep);
@@ -47,8 +42,8 @@ public class Endereco {
             this.cep = dados.optString("cep");
             this.logradouro = dados.optString("logradouro");
             this.bairro = dados.optString("bairro");
-            this.localidade = dados.optString("localidade");
-            this.uf = dados.optString("uf");
+            this.cidade = dados.optString("localidade");
+            this.estado = dados.optString("uf");
         }
     }
 
