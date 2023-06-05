@@ -24,5 +24,6 @@ public class Usuario {
     private String email;
     @Column(name = "DS_SENHA")
     private String senha;
+    private Grupo grupo;
 
 }
