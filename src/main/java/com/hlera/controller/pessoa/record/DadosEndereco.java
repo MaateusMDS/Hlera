@@ -1,4 +1,4 @@
-package com.hlera.controller.record;
+package com.hlera.controller.pessoa.record;
 
 public record DadosEndereco(
          String estado,

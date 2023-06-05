@@ -1,4 +1,4 @@
-package com.hlera.controller.record;
+package com.hlera.controller.pessoa.record;
 
 import com.hlera.model.Pessoa.Grupo;
 

@@ -1,8 +1,6 @@
 package com.hlera.model.endereco;
 
-import com.google.gson.Gson;
-import com.hlera.controller.record.Dados;
-import com.hlera.controller.record.DadosEndereco;
+import com.hlera.controller.pessoa.record.DadosEndereco;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
