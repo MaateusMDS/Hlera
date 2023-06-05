@@ -1,5 +1,6 @@
 package com.hlera.model.Pessoa;
 
+import com.hlera.controller.record.Dados;
 import com.hlera.controller.record.putPessoa;
 import com.hlera.controller.record.savePessoa;
 import com.hlera.model.endereco.Endereco;
@@ -15,7 +16,13 @@ import java.time.LocalDate;
 @ToString
 
 @Entity
-@Table(name = "TB_HLERA_PESSOA")
+@Table(name = "TB_HLERA_PESSOA", uniqueConstraints = {
+        @UniqueConstraint(name = "UN_CPF", columnNames = "CPF_PESSOA"),
+        @UniqueConstraint(name = "UN_RG", columnNames = "RG_PESSOA"),
+        @UniqueConstraint(name = "UN_CELULAR", columnNames = "NR_CELULAR"),
+        @UniqueConstraint(name = "UN_TELEFONE", columnNames = "NR_TELEFONE"),
+        @UniqueConstraint(name = "UN_EMAIL", columnNames = "DS_EMAIL")
+})
 public class Pessoa {
     @Id
     @GeneratedValue(generator = "SQ_PESSOA", strategy = GenerationType.SEQUENCE)
@@ -46,8 +53,8 @@ public class Pessoa {
         this.dataNascimento = dados.dataNascimento();
         this.numeroCelular = dados.numeroCelular();
         this.numeroTelefone = dados.numeroTelefone();
-        this.dados = dados.dados();
-        this.endereco = dados.endereco();
+        this.dados = new Usuario(dados.dados());
+        this.endereco = new Endereco(dados.endereco());
     }
 
     public void atualizarPessoa(putPessoa dados) {
@@ -70,10 +77,10 @@ public class Pessoa {
             this.numeroTelefone = dados.numeroTelefone();
         }
         if(dados.dados() != null){
-            this.dados = dados.dados();
+            this.dados.atualizar(dados.dados());
         }
         if(dados.endereco() != null){
-            this.endereco = dados.endereco();
+            this.endereco.atualizar(dados.endereco());
         }
     }
 }

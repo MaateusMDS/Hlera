@@ -1,6 +1,8 @@
 package com.hlera.model.endereco;
 
 import com.google.gson.Gson;
+import com.hlera.controller.record.Dados;
+import com.hlera.controller.record.DadosEndereco;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -44,6 +46,40 @@ public class Endereco {
             this.bairro = dados.optString("bairro");
             this.cidade = dados.optString("localidade");
             this.estado = dados.optString("uf");
+        }
+    }
+
+    public Endereco(DadosEndereco dados) {
+        this.estado = dados.estado();
+        this.cidade = dados.cidade();
+        this.logradouro = dados.logradouro();
+        this.bairro = dados.bairro();
+        this.cep = dados.cep();
+        this.numero = dados.numero();
+        this.complemento = dados.complemento();
+    }
+    
+    public void atualizar(DadosEndereco dados){
+        if (dados.estado() != null){
+            this.estado = dados.estado();
+        }
+        if (dados.cidade() != null){
+            this.cidade = dados.cidade();
+        }
+        if (dados.logradouro() != null){
+            this.logradouro = dados.logradouro();
+        }
+        if (dados.bairro() != null){
+            this.bairro = dados.bairro();
+        }
+        if (dados.cep() != null){
+            this.cep = dados.cep();
+        }
+        if (dados.numero() != null){
+            this.numero = dados.numero();
+        }
+        if (dados.complemento() != null){
+            this.complemento = dados.complemento();
         }
     }
 

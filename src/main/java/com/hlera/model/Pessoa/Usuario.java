@@ -1,5 +1,6 @@
 package com.hlera.model.Pessoa;
 
+import com.hlera.controller.record.Dados;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,4 +17,22 @@ public class Usuario {
     private String senha;
     @Column(name = "GR_PESSOA")
     private Grupo grupo;
+
+    public Usuario(Dados dados) {
+        this.email = dados.email();
+        this.senha = dados.senha();
+        this.grupo = dados.grupo();
+    }
+
+    public void atualizar(Dados dados) {
+        if(dados.email() != null){
+            this.email = dados.email();
+        }
+        if(dados.senha() != null){
+            this.senha = dados.senha();
+        }
+        if(dados.grupo() != null){
+            this.grupo = dados.grupo();
+        }
+    }
 }

@@ -12,7 +12,7 @@ public record putPessoa(
         LocalDate dataNascimento,
         String numeroCelular,
         String numeroTelefone,
-        Usuario dados,
-        Endereco endereco
+        Dados dados,
+        DadosEndereco endereco
 ) {
 }
