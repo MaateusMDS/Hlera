@@ -2,6 +2,7 @@ package com.hlera.controller.campanha;
 
 import com.hlera.controller.campanha.record.putCampanha;
 import com.hlera.controller.campanha.record.saveCampanha;
+import com.hlera.model.Pessoa.Pessoa;
 import com.hlera.model.campanha.Campanha;
 import com.hlera.repository.CampanhaRepository;
 import com.hlera.repository.PessoaRepository;
@@ -13,7 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/campanha")
@@ -54,6 +57,22 @@ public class CampanhaController {
         try {
             this.status.put("status", 200);
             this.status.put("message", repository.findAll().toArray());
+        } catch (Exception e) {
+            this.status.put("status", 500);
+            this.status.put("message", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(status);
+        }
+        return ResponseEntity.ok(status);
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<Object> getCampanhasByUser(@PathVariable("id") Long id) {
+
+        this.status.clear();
+
+        try {
+            this.status.put("status", 200);
+            this.status.put("message", repository.findCampanhaByUser(id).toArray());
         } catch (Exception e) {
             this.status.put("status", 500);
             this.status.put("message", e.getMessage());
