@@ -1,4 +1,4 @@
-package com.hlera.controller.campanha;
+package com.hlera.controller.inscricoes;
 
 import com.hlera.repository.CampanhaRepository;
 import com.hlera.repository.PessoaRepository;
@@ -32,9 +32,15 @@ public class InscricoesController {
             if (campanha.isPresent()) {
                 var user = userRepository.findById(userId);
                 if (user.isPresent()) {
-                    campanha.get().addInscrito(user.get());
-                    this.status.put("status", 200);
-                    this.status.put("message", campanha.get().getInscritos());
+                    if (campanha.get().getInscritos().size() + 1 <= campanha.get().getItensDisponiveis()) {
+                        campanha.get().addInscrito(user.get());
+                        this.status.put("status", 200);
+                        this.status.put("message", campanha.get().getInscritos());
+                    } else {
+                        this.status.put("status", 507);
+                        this.status.put("message", "Máximo de pessoas atingidas na campanha.");
+                        return ResponseEntity.status(HttpStatus.INSUFFICIENT_STORAGE).body(this.status);
+                    }
                 } else {
                     this.status.put("status", 400);
                     this.status.put("message", "Usuário não encontrado.");
