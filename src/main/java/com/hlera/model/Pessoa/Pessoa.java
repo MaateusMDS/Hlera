@@ -20,7 +20,6 @@ import java.time.LocalDate;
         @UniqueConstraint(name = "UN_CPF", columnNames = "CPF_PESSOA"),
         @UniqueConstraint(name = "UN_RG", columnNames = "RG_PESSOA"),
         @UniqueConstraint(name = "UN_CELULAR", columnNames = "NR_CELULAR"),
-        @UniqueConstraint(name = "UN_TELEFONE", columnNames = "NR_TELEFONE"),
         @UniqueConstraint(name = "UN_EMAIL", columnNames = "DS_EMAIL")
 })
 public class Pessoa {
@@ -39,8 +38,6 @@ public class Pessoa {
     private LocalDate dataNascimento;
     @Column(name = "NR_CELULAR")
     private String numeroCelular;
-    @Column(name = "NR_TELEFONE")
-    private String numeroTelefone;
     @Embedded
     private Usuario dados;
     @Embedded
@@ -52,7 +49,6 @@ public class Pessoa {
         this.rg = dados.rg();
         this.dataNascimento = dados.dataNascimento();
         this.numeroCelular = dados.numeroCelular();
-        this.numeroTelefone = dados.numeroTelefone();
         this.dados = new Usuario(dados.dados());
         this.endereco = new Endereco(dados.endereco());
     }
@@ -72,9 +68,6 @@ public class Pessoa {
         }
         if(dados.numeroCelular() != null){
             this.numeroCelular = dados.numeroCelular();
-        }
-        if(dados.numeroTelefone() != null){
-            this.numeroTelefone = dados.numeroTelefone();
         }
         if(dados.dados() != null){
             this.dados.atualizar(dados.dados());

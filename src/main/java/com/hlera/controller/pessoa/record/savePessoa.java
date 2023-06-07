@@ -19,8 +19,6 @@ public record savePessoa (
         LocalDate dataNascimento,
         @NotBlank
         String numeroCelular,
-        @NotBlank
-        String numeroTelefone,
         @NotNull @Valid
         Dados dados,
         @NotNull @Valid

@@ -12,7 +12,6 @@ public record putPessoa(
         @Past @JsonFormat(pattern = "dd/MM/yyyy")
         LocalDate dataNascimento,
         String numeroCelular,
-        String numeroTelefone,
         Dados dados,
         DadosEndereco endereco
 ) {
