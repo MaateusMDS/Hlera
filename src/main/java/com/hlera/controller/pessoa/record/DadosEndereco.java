@@ -1,6 +1,7 @@
 package com.hlera.controller.pessoa.record;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 public record DadosEndereco(
         @NotBlank
@@ -11,9 +12,9 @@ public record DadosEndereco(
         String logradouro,
         @NotBlank
         String bairro,
-        @NotBlank
+        @NotBlank @Pattern(regexp = "(^[0-9]{5})-?([0-9]{3}$)")
         String cep,
-        @NotBlank
+        @NotBlank @Pattern(regexp = "^\\d+$")
         String numero,
         String complemento
 ) {
