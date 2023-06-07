@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,16 +26,16 @@ public class PessoaController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<Map<String, Object>> saveUser(@RequestBody @Valid savePessoa dados) {
+    public ResponseEntity<Map<String, Object>> saveUser(@RequestBody @Valid savePessoa dados, UriComponentsBuilder ucBuilder) {
 
         this.status.clear();
 
         try {
             Pessoa pessoa = repository.save(new Pessoa(dados));
-            this.status.put("status", 200);
+            var uri = ucBuilder.path("/{id}").buildAndExpand(pessoa.getId()).toUri();
+            this.status.put("status", 201);
             this.status.put("message", pessoa);
-
-            return ResponseEntity.ok(status);
+            return ResponseEntity.created(uri).body(status);
         } catch (Exception e) {
             this.status.put("status", 500);
             this.status.put("message", e.getMessage());

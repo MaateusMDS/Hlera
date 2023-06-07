@@ -2,7 +2,6 @@ package com.hlera.controller.campanha;
 
 import com.hlera.controller.campanha.record.putCampanha;
 import com.hlera.controller.campanha.record.saveCampanha;
-import com.hlera.model.Pessoa.Pessoa;
 import com.hlera.model.campanha.Campanha;
 import com.hlera.repository.CampanhaRepository;
 import com.hlera.repository.PessoaRepository;
@@ -12,11 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/campanha")
@@ -32,16 +30,17 @@ public class CampanhaController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<Map<String, Object>> saveCampanha(@RequestBody @Valid saveCampanha dados) {
+    public ResponseEntity<Map<String, Object>> saveCampanha(@RequestBody @Valid saveCampanha dados, UriComponentsBuilder ucBuilder) {
 
         this.status.clear();
 
         try {
             Campanha campanha = repository.save(new Campanha(dados));
-            this.status.put("status", 200);
+            var uri = ucBuilder.path("/{id}").buildAndExpand(campanha.getId()).toUri();
+            this.status.put("status", 201);
             this.status.put("message", campanha);
 
-            return ResponseEntity.ok(status);
+            return ResponseEntity.created(uri).body(status);
         } catch (Exception e) {
             this.status.put("status", 500);
             this.status.put("message", e.getMessage());
@@ -115,12 +114,12 @@ public class CampanhaController {
             if (campanha.isPresent()) {
                 repository.deleteById(id);
 
-                this.status.put("status", 200);
+                this.status.put("status", 204);
                 this.status.put("message", campanha.get().getNome() + " deleted");
             } else {
-                this.status.put("status", 400);
+                this.status.put("status", 404);
                 this.status.put("message", "Campanha não encontrada.");
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(this.status);
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(this.status);
             }
 
             return ResponseEntity.ok(status);

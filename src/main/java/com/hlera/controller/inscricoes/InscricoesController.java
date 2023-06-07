@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class InscricoesController {
 
     @PostMapping("/{user}")
     @Transactional
-    public ResponseEntity<Object> adicionarInscrito(@PathVariable("campanha") Long campanhaId, @PathVariable("user") Long userId) {
+    public ResponseEntity<Object> adicionarInscrito(@PathVariable("campanha") Long campanhaId, @PathVariable("user") Long userId, UriComponentsBuilder ucBuilder) {
         this.status.clear();
         try {
             var campanha = campanhaRepository.findById(campanhaId);
@@ -34,8 +35,10 @@ public class InscricoesController {
                 if (user.isPresent()) {
                     if (campanha.get().getInscritos().size() + 1 <= campanha.get().getItensDisponiveis()) {
                         campanha.get().addInscrito(user.get());
-                        this.status.put("status", 200);
-                        this.status.put("message", campanha.get().getInscritos());
+                        var uri = ucBuilder.path("/{id}").buildAndExpand(user.get().getId()).toUri();
+                        this.status.put("status", 201);
+                        this.status.put("message", campanha);
+                        return ResponseEntity.created(uri).body(status);
                     } else {
                         this.status.put("status", 507);
                         this.status.put("message", "Máximo de pessoas atingidas na campanha.");
@@ -56,7 +59,6 @@ public class InscricoesController {
             this.status.put("message", e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(status);
         }
-        return ResponseEntity.ok(status);
     }
 
     @GetMapping()
