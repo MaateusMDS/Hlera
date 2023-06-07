@@ -1,5 +1,6 @@
 package com.hlera.model.Pessoa;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.hlera.controller.pessoa.record.putPessoa;
 import com.hlera.controller.pessoa.record.savePessoa;
 import com.hlera.model.endereco.Endereco;
