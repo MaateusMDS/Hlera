@@ -6,6 +6,7 @@ import com.hlera.model.Pessoa.Pessoa;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -33,6 +34,9 @@ public class Campanha {
     @Column(name = "TP_CAMPANHA")
     @Getter @Setter
     private Tipo tipoCampanha;
+    @Column(name = "DS_DESCRICAO")
+    @Getter @Setter
+    private String descricao;
     @Column(name = "NR_ITENS_DISPONIVEIS")
     @Getter @Setter
     private int itensDisponiveis;
@@ -74,6 +78,7 @@ public class Campanha {
         this.nome = dados.nome();
         this.tipoCampanha = dados.tipoCampanha();
         this.itensDisponiveis = dados.itensDisponiveis();
+        this.descricao = dados.descricao();
     }
     
     public void atualizar(putCampanha dados){
@@ -88,6 +93,9 @@ public class Campanha {
         }
         if (dados.inscritos() != null){
             this.inscritos = dados.inscritos();
+        }
+        if (dados.descricao() != null){
+            this.descricao = dados.descricao();
         }
     }
 }

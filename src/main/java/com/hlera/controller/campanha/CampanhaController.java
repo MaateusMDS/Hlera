@@ -87,13 +87,13 @@ public class CampanhaController {
         this.status.clear();
 
         try {
-            var usuario = repository.findById(id);
-            if (usuario.isPresent()) {
+            var campanha = repository.findById(id);
+            if (campanha.isPresent()) {
                 status.put("status", 200);
-                status.put("message", usuario.stream().toArray());
+                status.put("message", campanha.stream().toArray());
             } else {
                 this.status.put("status", 400);
-                this.status.put("message", "Usuário não encontrado.");
+                this.status.put("message", "Campanha não encontrada.");
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(this.status);
             }
         } catch (Exception e) {
@@ -119,7 +119,7 @@ public class CampanhaController {
                 this.status.put("message", campanha.get().getNome() + " deleted");
             } else {
                 this.status.put("status", 400);
-                this.status.put("message", "Usuário não encontrado.");
+                this.status.put("message", "Campanha não encontrada.");
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(this.status);
             }
 
@@ -138,17 +138,17 @@ public class CampanhaController {
         this.status.clear();
 
         try {
-            var usuarioId = repository.findById(id);
-            if (usuarioId.isPresent()) {
+            var campanhaId = repository.findById(id);
+            if (campanhaId.isPresent()) {
                 Campanha campanha = repository.getReferenceById(id);
 
                 campanha.atualizar(dados);
 
                 this.status.put("status", 200);
-                this.status.put("message", usuarioId.stream().toArray());
+                this.status.put("message", campanhaId.stream().toArray());
             } else {
                 this.status.put("status", 400);
-                this.status.put("message", "Usuário não encontrado.");
+                this.status.put("message", "Campanha não encontrada.");
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(this.status);
             }
             return ResponseEntity.ok(status);
