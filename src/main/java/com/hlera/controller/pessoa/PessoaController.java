@@ -7,6 +7,9 @@ import com.hlera.repository.PessoaRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,18 +47,19 @@ public class PessoaController {
     }
 
     @GetMapping()
-    public ResponseEntity<Object> getAll(){
+    public ResponseEntity<Map<String, Object>> getAll(@PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
 
         this.status.clear();
 
         try {
-            this.status.put("status", 200);
-            this.status.put("message", repository.findAll().toArray());
+            status.put("status", 200);
+            status.put("message", repository.findAll(pageable).getContent());
         } catch (Exception e) {
-            this.status.put("status", 500);
-            this.status.put("message", e.getMessage());
+            status.put("status", 500);
+            status.put("message", e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(status);
         }
+
         return ResponseEntity.ok(status);
     }
 
